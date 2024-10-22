@@ -7,3 +7,7 @@
 затем
 
 `mypy .`
+
+если хотите запустить - 
+
+`poetry run python main.py`
