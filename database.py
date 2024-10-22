@@ -1,12 +1,11 @@
 # type: ignore
 from typing import Annotated
 from sqlalchemy import String
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncAttrs
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncAttrs, async_sessionmaker
 from sqlalchemy.orm import (
     DeclarativeBase,
     Mapped,
     mapped_column,
-    sessionmaker,
 )
 
 DATABASE_URL = "sqlite+aiosqlite:///:memory:"
@@ -31,7 +30,7 @@ class Course(ModelBase):
 
 # Create async engine and session
 engine = create_async_engine(DATABASE_URL, echo=True)
-AsyncSessionFactory = sessionmaker(
+AsyncSessionFactory = async_sessionmaker(
     bind=engine,  # Используем bind для привязки движка
     class_=AsyncSession,
     expire_on_commit=False,
